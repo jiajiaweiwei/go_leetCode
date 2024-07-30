@@ -4,11 +4,12 @@ func main() {
 
 }
 
-/**
- * Your LRUCache object will be instantiated and called as such:
- * obj := Constructor(capacity);
- * param_1 := obj.Get(key);
- * obj.Put(key,value);
+/*
+*
+* Your LRUCache object will be instantiated and called as such:
+* obj := Constructor(capacity);
+* param_1 := obj.Get(key);
+* obj.Put(key,value);
  */
 /*
 type ListNodeTwo struct {
@@ -35,7 +36,7 @@ func Constructor(capacity int) LRUCache {
 }
 
 // Get 获取到某元素之后，如果获取到 将该元素移动到链表头
-// 获取元素 是直接通过key value 的形式，故此处要用到map
+//获取元素 是直接通过key value 的形式，故此处要用到map
 func (this *LRUCache) Get(key int) int {
 	//拿到LRUCache的哑节点（指向第一个节点）
 	dumpNode := this.DumpNode
@@ -110,4 +111,5 @@ func (this *LRUCache) Put(key int, value int) {
 
 	}
 
-}*/
+}
+*/

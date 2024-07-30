@@ -20,48 +20,52 @@ func main() {
 
 // 矩阵 中等题 螺旋矩阵
 // 方法2 按层模拟，根据数学方法，一圈圈、一层层遍历
+// 为什么可以直接循环： 当外面第一层螺旋遍历完之后，内层相当于就是一样的算法，所以只需要将 矩阵的规格缩一圈即可，算法是一样的
 func spiralOrder(matrix [][]int) []int {
-	// 异常情况处理
-	if len(matrix) == 0 {
-		return []int{}
-	}
+	// 中等题 螺旋矩阵
+	// 方法1 按层模拟 好理解
 	// 返回值
-	resultNums := make([]int, len(matrix[0])*len(matrix))
-	//  ，bottom层数
+	resultNum := make([]int, len(matrix)*len(matrix[0]))
+	// 一圈一圈模拟，通过记录圈的复杂度来循环，内层算法都是一样的
+	// 行数 顶层 和 底层 下标(上下边界)
 	top, bottom := 0, len(matrix)-1
-	//  ，列数
+	// 列数  左右边界的下标（左右边界）
 	left, right := 0, len(matrix[0])-1
-	//外层循环条件
+	// 循环 重点搞清楚退出循环的条件是啥
 	index := 0
-	for top <= bottom && left <= right { // 外层循环条件 层数起点小于重点 列数起点小于终点
-		// 沿着顶边 从左到右遍历
+	for top <= bottom && left <= right {
+		// 左到右
 		for i := left; i <= right; i++ {
-			resultNums[index] = matrix[top][i]
+			resultNum[index] = matrix[top][i]
 			index++
 		}
-		top++ //递归层数变化
+		// 更新 矩阵 规模（变小，遍历过的不用再遍历了）
+		top++
+		// 上到下
 		for i := top; i <= bottom; i++ {
-			// 右边从上到下遍历
-			resultNums[index] = matrix[i][right]
+			resultNum[index] = matrix[i][right]
 			index++
 		}
-		right-- //递归列数变化
+		// 更新规模
+		right--
+		// 右到左
 		if top <= bottom {
-			// 下边从右到左遍历
 			for i := right; i >= left; i-- {
-				resultNums[index] = matrix[bottom][i]
+				resultNum[index] = matrix[bottom][i]
 				index++
 			}
-			bottom-- //递归层数右边变化
+			// 下临界更新
+			bottom--
 		}
+		// 下到上
 		if left <= right {
-			// 左边从下到上遍历
 			for i := bottom; i >= top; i-- {
-				resultNums[index] = matrix[i][left]
+				resultNum[index] = matrix[i][left]
 				index++
 			}
-			left++ //递归列数变化
+			// 左临界更新
+			left++
 		}
 	}
-	return resultNums
+	return resultNum
 }
